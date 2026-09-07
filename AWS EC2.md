@@ -25,5 +25,23 @@ In 2006:
 4. Robust infrastructure that ensures high availability and reliability.
 5. Instances can be spread across multiple data centers, providing redundancy and fault tolerance.
 6. Helps distribute traffic and automatically adjust resources to maintain performance and availability.
-7. Wide range of instance types like OS, software configurations etc.
-8. Instances integrate seamlessly with other AWS services such as S3, RDS for databases, VPC for networking and so on.
+7. Wide range of instance types like OS, software configurations, etc.
+8. Instances integrate seamlessly with other AWS services such as S3, RDS for databases, VPC for networking, and so on.
+
+## AWS Regions
+1. Within AWS Cloud, AWS regions are available.
+2. They are isolated from each other.
+3. This way, the design achieves high fault tolerance and stability.
+4. Automatic replication of resources across regions is not done.
+5. Within each region, availability zones from A to Z are available. These are physically isolated data centers to achieve high availability within a region.
+6. The AWS Backbone network is a global, high-capacity, highly reliable network infrastructure that interconnects Amazon Web Services data centers and network points of presence worldwide.
+
+## VPC
+1. AWS VPC is a service that lets you set up a private, isolated section within AWS Cloud to securely run resources.
+2. Each VPC provides logical isolation and acts as a private network within the AWS Cloud.
+3. You can customize various network settings to your specific requirements.
+4. A secure connection can be established between a VPC and an on-premises data center using a VPN, which results in a hybrid-cloud setup.
+5. VPCs can also be connected together using VPC peering. This enables communication between them within the cloud.
+6. A VPC can be further divided into subnets to manage the network effectively for routing and application segregation based on the requirements.
+7. A subnet is always associated with an availability zone.
+8. Route tables help apps within a VPC to talk to apps within a different VPC or elsewhere.
