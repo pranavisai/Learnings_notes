@@ -45,3 +45,15 @@ In 2006:
 6. A VPC can be further divided into subnets to manage the network effectively for routing and application segregation based on the requirements.
 7. A subnet is always associated with an availability zone.
 8. Route tables help apps within a VPC to talk to apps within a different VPC or elsewhere.
+
+## Security Group 
+1. A security group verifies incoming requests and allows traffic only if it is authorized to access the system.
+2. Two types of rules in a security group: inbound rules and outbound rules.
+3. Three main components of the security group: protocol, port range, and source.
+
+## NACL (Network Access Control Lists)
+1. This is used to gain fine-grained access control.
+2. Two types of rules in NACLs: inbound rules and outbound rules.
+3. NACLs are stateless, so the outbound rule for every inbound rule must be explicitly mentioned.
+4. Best to use both security groups and NACLs according to the use case for better security.
+
