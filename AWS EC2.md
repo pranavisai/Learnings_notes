@@ -147,3 +147,29 @@ In 2006:
        2. Payment for the volume usage is charged as long as the data persists.
     3. Disk Encryption: Encrypted EBS volumes can be used to meet a wide range of data-at-rest encryption requirements for regulated data and applications.
     4. Snapshots: EBS provides the ability to create snapshots for any EBS volume and write a copy of the data in the volume to Amazon S3. Modifications can be done without service interruption.
+
+## EC2 instance life cycle
+1. Stage 1: After launching, it is in a pending state. AWS is trying to find a host to launch the EC2 instance based on the instance type.
+2. A health check is performed before moving it to the running state. If the health check fails, shutting down is automatically triggered, followed by termination.
+3. Stage 2: This is the running state, and the data in the instance store is available. Based on the VPC settings, a dynamic IP is assigned to the EC2 instance automatically.
+4. Stage 3: The "stop" state occurs when a stop signal is passed through the console, CLI, or an OS command.
+5. Resources like EBS volumes, Elastic IPs, and private IPs are retained in the stopped state.
+6. Stage 4: Terminate. When a stopped instance is terminated, the state will change to shutting-down first. This is the preparation for termination. Compute resources are released for reuse.
+
+## EC2 user data
+1. It is a user data script that the user provides while creating the EC2 instance.
+2. Using this, the EC2 instance performs a few tasks automatically before it is ready in the target state, like downloading remote files and validating health checks of APIs, installing packages, or bootstrapping the EC2 instance.
+3. This is executed only during instance launch and not during reboot.
+4. User data must be Base64 encoded. It is limited to 16KB in raw form before Base64 encoding.
+5. Longer user data scripts can impact the boot time.
+
+## EC2 static and Dynamic IP addresses
+1. AWS has a pool of public IP addresses that are assigned dynamically to required instances.
+2. The behaviour of dynamic IP allocation is dependent on the subnet settings. It is also region-specific.
+3. When not used, they are released to the pool of addresses automatically.
+4. An Elastic IP address is static. It is for use in a specific region only and cannot be moved to a different region.
+5. To use an Elastic IP address, we first associate one with the account, then with the instance or network interface.
+6. A disassociated Elastic IP address remains allocated to the account until explicitly released.
+7. AWS imposes an hourly charge for Elastic IP addresses that are not associated with running instances.
+8. Static IP addresses can be reused by assigning them to multiple EC2 instances, whereas dynamic IP is one-to-one and allocated based on requirements.
+9. Dynamic IPs are automatically assigned to instances, while elastic IPs are manually allocated and associated with instances.
