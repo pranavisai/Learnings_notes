@@ -171,5 +171,50 @@ In 2006:
 5. To use an Elastic IP address, we first associate one with the account, then with the instance or network interface.
 6. A disassociated Elastic IP address remains allocated to the account until explicitly released.
 7. AWS imposes an hourly charge for Elastic IP addresses that are not associated with running instances.
-8. Static IP addresses can be reused by assigning them to multiple EC2 instances, whereas dynamic IP is one-to-one and allocated based on requirements.
+8. Static IP addresses can be reused by assigning them to multiple EC2 instances, whereas dynamic IPs are one-to-one and allocated based on requirements.
 9. Dynamic IPs are automatically assigned to instances, while elastic IPs are manually allocated and associated with instances.
+
+
+## IAM role
+1. Application servers that are running on an EC2 instance, if they need to interact with AWS services, must sign the API requests with AWS credentials.
+2. The option of using an access key and secret access key works well for a single EC2 instance.
+3. If credentials are not present on the instance, then the requests to AWS services are rejected.
+4. An IAM role is an IAM identity that we can create in our account that has specific permissions. Works similarly to an IAM user.
+5. The role can be assumed by anyone who needs it.
+6. When a role is assumed, temporary security credentials for the role session are created.
+7. IAM policy with required permissions are attached to this role and used when creating or running an EC2 instance.
+8. Metadata of any EC2 instance can only be accessed at IP 169.254.169.254.
+9. The temporary credentials will have an access key, secret key, and a token.
+10. Multiple EC2 instances can be attached to a single IAM role.
+11. AWS CLI, SDK, and other tools fetch credentials automatically from the EC2 instance metadata service.
+
+## Launch Templates
+1. A template with all the common features that can be used readily instead of repeatedly building from scratch.
+2. Advantages: Standardization and increased scale.
+3. This concept can be used for EC2 instances as well, for common elements such as an IAM role, security group, network configuration, instance type, AMI, and many more.
+4. This is called a launch template, which provides standardization, repeatability, and control over the EC2 instance.
+5. Launch templates support versioning.
+6. Existing template updates can be done without disrupting the existing EC2 instance.
+7. Parameterization is also supported to allow  customization during instance launch.
+8. Instance termination protection can be enabled at the launch template level.
+9. They also support user data.
+
+## AWS Auto Scaling Group
+1. It is used to dynamically scale EC2 instances based on demand.
+2. When a scaling policy is in effect, the Auto Scaling group adjusts the desired capacity of the group between the minimum and the maximum value that is specified. It also launches or terminates the instances as needed.
+3. Scaling policy classifications: Manual, Dynamic, and Scheduled.
+4. Auto-healing: When EC2 instances are not healthy, the Auto Scaling group will terminate and launch instances to match the configuration.
+5. Fixed-limit auto scaling: Minimum, desired, and maximum.
+6. Ensured that the minimum number of instances is always running.
+7. The size of the auto scaling group is dependent on the number of instances that have been set to the desired capacity.
+8. When the dynamic scaling policy is in effect, the auto scaling group adjusts the desired capacity of the group between min and max values that are specified.
+9. Three types of dynamic scaling policies: Target Tracking Scaling, Step Scaling and Simple Scaling.
+10. Target Tracking Scaling: A specific metric is tracked. Accordingly, scaling is triggered.
+11. By default, average CPU utilization, average network in, and network out are supported.
+12. Step and auto scaling support CloudWatch metrics.
+13. In simple scaling, CloudWatch alarms are created for scale-up and scale-down.
+14. In case an alarm is triggered, scaling happens based on what is defined in the policy.
+15. A CloudWatch alarm can be created for any AWS service.
+16. In Step scaling, other than alarms, there are additional options that can be provided to scale.
+17. Scheduled scaling: Scaling is done within the provided hours.
+18. A launch template is mandatory for an Auto Scaling Group to work. These include AMI, networking, access control, security group, etc.
