@@ -218,3 +218,33 @@ In 2006:
 16. In Step scaling, other than alarms, there are additional options that can be provided to scale.
 17. Scheduled scaling: Scaling is done within the provided hours.
 18. A launch template is mandatory for an Auto Scaling Group to work. These include AMI, networking, access control, security group, etc.
+
+## Load Balancer and Target Groups
+1. A load balancer is used to manage dynamic traffic for the EC2 instances.
+2. A load balancer is registered to a single EC2 instance.
+3. As the traffic grows, new EC2 instances are added automatically.
+4. AWS ELB (Elastic Load Balancer) is highly scalable and fault-tolerant. It spans across different availability zones.
+5. EC2 instances are grouped together based on specific characteristics, and these groups are called target groups.
+6. The same EC2 instance can be part of 2 target groups.
+7. Every LB has a listener that receives the traffic.
+8. When traffic arrives on the LB, listener rules are evaluated based on the priority order.
+9. Traffic is then forwarded to the target group based on the match.
+10. LBs are public when the clients are external and private when the requests originate from other EC2 instances within the VPC.
+11. The main purpose of an LB is high scalability and availability.
+12. Target group characteristics:
+    1. Supports EC2 instances, IP addresses, Lambda functions, and load balancers.
+    2. Supported protocols: HTTP one, HTTP two, gRPC, HTTPS, TCP, UDP, and many more.
+    3. Port range: 1 - 65535
+    4. Health check support: HTTP and HTTPS.
+13. Load balancer (LB) nodes always perform health checks on the EC2 instances that are registered to the load balancer.
+14. The LB stops sending traffic to any EC2 instance that it finds unhealthy.
+15. Cross-Zone Load Balancing: A technique of distributing load across targets that are registered to the load balancer. In this case, EC2 instances are spread across 3 availability zones (AZs).
+16. If a client performs DNS resolution of a domain that is registered to an LB, one of the LB's node IPs is sent as a response so that the client can connect to one of the nodes.
+17. If cross-zone is turned off, traffic is received by the LB node that forwards to the EC2 instances within the specific AZ.
+18. Cross-zone is always recommended for consistent utilization of EC2 instances.
+19. Types of LBs:
+    1. Application LB: Functions at the app layer, 7th layer of the OSI model.
+       1. Supports HTTP and HTTPS traffic, as well as advanced routing.
+    2. Network LB: Functions at the fourth layer of the OSI model. Supports TCP, UDP, and TLS. Handles millions of requests per second and is highly scalable.
+20. A static IP can be configured for each AZ in which the NLB node is present, allowing clients to have more control over the routing.
+21. Listener rules: forward, redirect, or fixed response. Supported conditions are: host header, path, HTTP request method, source IP, HTTP header, or query strings.
