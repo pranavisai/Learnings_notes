@@ -248,3 +248,14 @@ In 2006:
     2. Network LB: Functions at the fourth layer of the OSI model. Supports TCP, UDP, and TLS. Handles millions of requests per second and is highly scalable.
 20. A static IP can be configured for each AZ in which the NLB node is present, allowing clients to have more control over the routing.
 21. Listener rules: forward, redirect, or fixed response. Supported conditions are: host header, path, HTTP request method, source IP, HTTP header, or query strings.
+
+## CloudWatch
+1. It is a centralized monitoring service.
+2. It monitors AWS resources and applications that are run on AWS in real time.
+3. Alarms that watch metrics and send notifications or automatically make changes to the resources when a threshold is reached can be created.
+4. Scaling resources up and down according to load can also be done.
+5. System-wide visibility into application performance, resource utilization, and operational health.
+6. CloudWatch dashboards are customizable accordingly.
+7. Metrics data is kept for 15 months. Both up-to-the-minute and historical data can be viewed as necessary.
+8. CloudWatch Agent: It is lightweight software for collecting and sending data, logs, and metrics from AWS resources to CloudWatch for real-time monitoring.
+9. CloudWatch Logs are used to centralize, monitor, store, and access log files from EC2 instances, AWS CloudTrail, Route 53, or any other sources.
