@@ -259,3 +259,69 @@ In 2006:
 7. Metrics data is kept for 15 months. Both up-to-the-minute and historical data can be viewed as necessary.
 8. CloudWatch Agent: It is lightweight software for collecting and sending data, logs, and metrics from AWS resources to CloudWatch for real-time monitoring.
 9. CloudWatch Logs are used to centralize, monitor, store, and access log files from EC2 instances, AWS CloudTrail, Route 53, or any other sources.
+
+## EC2 pricing
+1. Cloud Growth Stages:
+   1. Start-up Phase: On-demand, Experiment, Pay-as-you-use
+   2. Steady Phase: Regular traffic, predictable growth.
+   3. Growth Phase: Different traffic during the day and at night, complex functionality; in the case of a famous website, continuous traffic is also added.
+2. Why EC2 cost management:
+      1. EC2 is one of the most commonly used AWS services in many organizations.
+      2. It is one of the major contributors to AWS billing.
+3. Different pricing models are available according to need and usage. This will help with cost optimization.
+   1. On-demand pricing: When a user requests an EC2 instance of a specific size, AWS will deliver on-demand and start billing the user for every second. This is called on-demand instance, and pricing.
+      1. It is high-priced, flexible per-second billing, with no commitment; delete anytime and pay only for the usage.
+      2. Use cases: Flexibility and experimentation, unplanned workloads.
+      
+   2. Spot Savings Plan: Taking advantage of unused EC2 capacity in the cloud. 
+      1. Available at a discount of up to 90% compared to on-demand prices.
+      2. Price is decided based on the capacity available and the demand for spot instances.
+      3. Users place a bid for the spot instance, and the highest bidder will get the EC2 instance unless the price does not change.
+      4. If an on-demand instance request comes in, spot instances are deleted automatically with a notice of 2 minutes. There is no control over the deletion process.
+      5. Features: 90% cost-effective, no commitment, price based on demand and supply.
+      6. Use cases: fault-tolerant and stateless workloads, applications that have flexible start and end times, like Hadoop clusters, batch processing, and so on.
+      7. Applications can run on heterogeneous hardware. Heterogeneous hardware refers to a computer system that uses multiple types of processors or specialized cores to execute tasks, rather than relying on a single, uniform central processing unit (CPU).
+     
+   3. Savings Plans:
+      1. Flexible pricing model that offers low prices on Amazon EC2 instances in exchange for a commitment to a consistent amount of usage measured in hours of a one- or three-year term.
+      2. Any usage above the commitment comes under on-demand pricing charges.
+      3. There are 2 types of savings plans:
+         1. Compute Savings Plan:
+            1. Provides the most flexibility and helps reduce costs by 66%.
+            2. The plan automatically applies to EC2 instances regardless of instance family, size, availability zone, region, and os tenancy.
+         2. EC2 Savings Plan:
+            1. Provides the lowest price, offering savings up to 72% in exchange for commitment to usage of an individual instance family in a region.
+            2. Flexibility to change usage between instances within the family in that region.
+
+   4. Reserved Instances: First-generation savings plan options provided by AWS.
+      1. Significant discount compared to on-demand instance price, similar to savings plans, especially for EC2 instances.
+      2. 2 types of reserved instance pricing:
+         1. Standard: Significant discounts up to 72% compared to on-demand instance pricing and can be purchased for 1-year or 3-year terms. Flexibility to change AZ, instance size, and network type.
+         2. Convertible: Discount up to 66% compared to on-demand instance price and can be purchased for 1-year or 3-year terms.
+            
+   5. Dedicated host: A physical server fully dedicated for use. Option to choose the number of sockets and cores. Flexibility to bring an on-premises license to the cloud.
+      1. Physical servers that maintain control over the server and what runs on it, with maintenance offloaded onto AWS.
+      2. Price is per dedicated host.
+
+   6. On-demand capacity reservations: Recommended for business-critical events or workloads that require capacity assurance. Workloads that need to meet regulatory requirements for high availability and disaster recovery.
+  
+## EC2 placement groups
+1. An AWS placement group is a network construct that allows you to control the placement of EC2 instances to meet specific needs.
+2. In a cluster placement group:
+   1. EC2 instances are packed together inside a specific AZ. Can't span across multiple AZs.
+   2. Used for low-latency, high-throughput networking, ideal for high-performance computing.
+   3. Recommended to use the same instance type for all the instances inside the cluster.
+3. Partition placement group:
+   1. Spreads your instances across logical partitions.
+   2. Divides each group of EC2 instances into logical segments called partitions.
+   3. Each partition has its own set of racks with no sharing.
+   4. Partitions in multiple AZs in the same region are possible.
+   5. Maximum of 7 partitions per AZ.
+   6. They do not share underlying hardware with a group of instances in a different partition.
+   7. This reduces the risk of simultaneous failures, providing high availability.
+4. Spread placement group:
+   1. Works similarly to a partition placement group.
+   2. Best for large distributed replicated workloads like Hadoop or Cassandra.
+   3. Each spread placement group has its own network and power sources.
+   4. Each EC2 instance is placed within a rack.
+   5. Maximum of 7 running instances per AZ per group.
